@@ -8,9 +8,21 @@ namespace Food_Recipe_App
 {
     class Food
     {
-        private int ID;
-        private string foodName;
-        private string description;
-        List<Step> recipeSteps;
+        private int _ID;
+        private string _foodName;
+        private string _description;
+        private string _imagePath;
+        List<Step> _recipeSteps;
+
+        public int ID { get; set; }
+        public string foodName { get; set; }
+        public string description { get; set; }
+        public string imagePath { get; set; }
+        public List<Step> recipeSteps { get; set; }
+
+       /* public override string ToString()
+        {
+            return $"{_foodName}";
+        }*/
     }
 }

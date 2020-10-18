@@ -23,6 +23,7 @@ namespace Food_Recipe_App
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Food> listOfFood = new List<Food>();
 
         SqlConnection connection;
 
@@ -45,11 +46,18 @@ namespace Food_Recipe_App
                     adapter.Fill(foodTable);
 
                     string fname;
-                    //fname = foodTable.Rows[0][1].ToString();
-                    //FoodList.Items.Add(fname);
-                    FoodList.DisplayMemberPath = "Name";
-                    FoodList.SelectedValuePath = "ID";
-                    FoodList.ItemsSource = foodTable.DefaultView.ToString();
+
+                    
+                    foreach (DataRow row in foodTable.Rows)
+                    {
+                        Food tempFood = new Food();
+                        tempFood.foodName = row["foodName"].ToString();
+                        tempFood.description = row["description"].ToString();
+                        tempFood.imagePath = row["imagePath"].ToString();
+                        listOfFood.Add(tempFood);
+                    }
+
+                    FoodList.ItemsSource = listOfFood;
                 }
             }
         }

@@ -17,7 +17,16 @@
         </ListView>
         <ListView Name="FoodList"   
                  Height="475" Width="845"
-                 Background="AliceBlue" Canvas.Left="50" Canvas.Top="145">
+                 Background="Beige" Canvas.Left="50" Canvas.Top="145">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding foodName}"></TextBlock>
+                        <TextBlock Text="{Binding description}"></TextBlock>
+                        <Image Width="50" Source="{Binding imagePath}"></Image>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Canvas>
 </Window>
