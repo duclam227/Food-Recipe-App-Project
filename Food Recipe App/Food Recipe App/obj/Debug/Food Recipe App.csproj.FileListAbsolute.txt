@@ -1,0 +1,18 @@
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\bin\Debug\RecipesDB.mdf
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\bin\Debug\RecipesDB_log.ldf
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\bin\Debug\Food Recipe App.exe.config
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\bin\Debug\Food Recipe App.exe
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\bin\Debug\Food Recipe App.pdb
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.csprojAssemblyReference.cache
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\MainWindow.g.cs
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\App.g.cs
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App_Content.g.cs
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App_MarkupCompile.cache
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App_MarkupCompile.lref
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\MainWindow.baml
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.g.resources
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food_Recipe_App.Properties.Resources.resources
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.csproj.GenerateResource.cache
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.csproj.CoreCompileInputs.cache
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.exe
+F:\#Kim\##Coding\C#\FoodRecipeApp\Food Recipe App\Food Recipe App\obj\Debug\Food Recipe App.pdb

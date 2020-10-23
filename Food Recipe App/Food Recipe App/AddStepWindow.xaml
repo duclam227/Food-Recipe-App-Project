@@ -1,0 +1,87 @@
+﻿<Window x:Class="Food_Recipe_App.AddStepWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Food_Recipe_App"
+        mc:Ignorable="d"
+        Title="Add new step" Height="600" Width="600"
+        Topmost="True" ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBox Name="TextBox_StepDescription"
+                 Grid.Row="0"
+                 Margin="20" Padding="10"
+                 IsEnabled="True"
+                 TextWrapping="Wrap"
+                 AcceptsReturn="True"
+                 FontSize="16"
+                 Focusable="True"                 
+                 >
+                Add step description
+            </TextBox>
+
+
+            <Button
+                    Grid.Row="1"
+                    Name ="Button_AddStepImage"
+                    Margin="5"
+                    Panel.ZIndex="2"
+                    Width="36" Height="36" 
+                    Click="Button_AddStepImage_Click"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                <Image
+                        Name="Image_AddHeader"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="./res/add.png">
+                </Image>
+            </Button>
+
+            <Button
+            Name ="Button_AddStep"
+            Margin="0 0 0 20"
+            Grid.Row="3"
+            Width="36" Height="36" Click="Button_AddStep_Click"
+            Background="Transparent"
+            BorderBrush="Transparent">
+                <Image
+                RenderOptions.BitmapScalingMode="HighQuality"
+                Name="Image_AddStep"
+                Source="./res/plus.png">
+                </Image>
+            </Button>
+        </Grid>
+        <ListView Name="ListView_AddStepPictures"
+                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  Margin="10"
+                  Grid.Column="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="{Binding}"
+                        Width="{Binding RelativeSource= {RelativeSource FindAncestor,
+                        AncestorType={x:Type ListView}}, Path=ActualWidth}"
+                        Stretch="Uniform"></Image>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
+    
