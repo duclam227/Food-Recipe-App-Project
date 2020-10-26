@@ -1,0 +1,142 @@
+﻿<Window x:Class="Food_Recipe_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Food_Recipe_App"
+        mc:Ignorable="d"
+        Title="Food Recipe App" Height="650" Width="900" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen" MinHeight="300" MinWidth="600" Icon="Images/logo.ico">
+
+    <Grid>
+        <!--#region grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+
+        <Grid Name="Sidebar"
+                Background="White"
+                Grid.Column="0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image Name="HomeButton"
+                   Source="Images/logo.ico" Grid.Column="1" Grid.Row="0"></Image>
+            <!--<Image Name="SearchButton"
+                   Source="Images/searchIcon.png" Grid.Column="1" Grid.Row="1"></Image>-->
+            <local:SearchToolBar x:Name="SearchToolBar"
+                                 eventReturnFoodResult="SearchToolBar_eventReturnFoodResult"
+                                 Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Image Name="FavoriteButton"
+                   Source="Images/favoriteIcon.png" Grid.Column="1" Grid.Row="2"></Image>
+        </Grid>
+
+        <Grid Name="FavoritePart" 
+              Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Label Content=".Món ăn yêu thích" FontSize="40"
+                   FontWeight="Black" Grid.Column="0"
+                   Panel.ZIndex="99" VerticalAlignment="Bottom" 
+                   HorizontalAlignment="Left"
+                   MinWidth="360" IsHitTestVisible="False"/>
+
+            <ListView x:Name="FavoriteList" Grid.RowSpan="2"
+                 Background="HotPink" Grid.Column="1"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
+                            Background="LightPink" CornerRadius="0">
+                            <StackPanel VerticalAlignment="Center">
+                                <Label Content="{Binding foodName}" HorizontalAlignment="Center"/>
+                                <Image Source="{Binding imagePath}" Width="140" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding description}" HorizontalAlignment="Center"/>
+                                <Button HorizontalAlignment="Right" Width="20">
+                                    <Image Source="Images/FavoriteIcon.png"></Image>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
+
+        <Grid Name="FoodPart"
+              Grid.Column="1" Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Panel.ZIndex="99"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Button Name="PreviousButton" Width="20" Height="20" Click="PreviousButton_Click">prev</Button>
+                <TextBlock Name="PageNumber" 
+                           Text=" 1 " VerticalAlignment="Center"
+                           FontSize="20" FontWeight="Bold"></TextBlock>
+                <Button Name="NextButton" Width="20" Height="20" Click="NextButton_Click">next</Button>
+            </StackPanel>
+            
+            <ListView Name="FoodList"
+                 Background="LightPink"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 Grid.RowSpan="2">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="180" Height="180" ClipToBounds="True" Margin="5"
+                            BorderThickness="1" BorderBrush="PaleVioletRed" CornerRadius="0"
+                            >
+                            <StackPanel VerticalAlignment="Center">
+                                <Label Content="{Binding ID}" HorizontalAlignment="Center"></Label>
+                                <Label Content="{Binding foodName}" HorizontalAlignment="Center"></Label>
+                                <Image Source="{Binding imagePath}" Height="100" HorizontalAlignment="Center"></Image>
+                                <Label Content="{Binding description}" HorizontalAlignment="Center"></Label>
+                                <Button HorizontalAlignment="Right" Width="20">
+                                    <Image Source="Images/FavoriteIcon.png"></Image>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
+        
+    </Grid>
+</Window>
