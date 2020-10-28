@@ -69,7 +69,9 @@ namespace Food_Recipe_App
 
         private void Button_AddVideo_Click(object sender, RoutedEventArgs e)
         {
-
+            AddRecipeMediaWindow mediaWindow = new AddRecipeMediaWindow();
+            mediaWindow.Owner = this;
+            mediaWindow.ShowDialog();
         }
     }
 }
