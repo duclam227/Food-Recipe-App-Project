@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Food_Recipe_App.SortButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Food_Recipe_App"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MyTextBlock" TargetType="TextBlock">
+            <Setter Property="Background" Value="{x:Null}"></Setter>
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Canvas
+            VerticalAlignment="Center"
+            Height="30">
+            <Button Name="SortButtonIcon"
+                            Panel.ZIndex="98"
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource MyButton}"
+                            Click="SortButtonIcon_Click"
+                    Canvas.Left="30"
+                    ToolTip="Chế độ hiển thị">
+                <Image Source="Images/sortIcon.png" Height="28"/>
+            </Button>
+            <ListBox x:Name="SortOptionsList"
+                         Panel.ZIndex="98"
+                         BorderThickness="0" 
+                         Foreground="#5B86E5"
+                         Visibility="Collapsed"
+                     Canvas.Top="32"
+                     SelectionChanged="SortOptionsList_SelectionChanged">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding}" Style="{StaticResource MyTextBlock}"
+                                       HorizontalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+        </Canvas>
+    </Grid>
+</UserControl>
