@@ -40,6 +40,7 @@ namespace Food_Recipe_App
         private void SortOptionsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var text = SortOptionsList.SelectedItem.ToString();
+            SortOptionsList.Visibility = Visibility.Collapsed;
             eventPassStringToMain(text);
         }
 

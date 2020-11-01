@@ -16,7 +16,6 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
-using PagedList;
 using System.Collections.ObjectModel;
 using System.CodeDom;
 
@@ -52,7 +51,8 @@ namespace Food_Recipe_App
         public MainWindow()
         {
             InitializeComponent();
-
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
             connectionString = ConfigurationManager.ConnectionStrings["Food_Recipe_App.Properties.Settings.RecipesDBConnectionString"].ConnectionString;
             LoadFoodIntoTable("");
         }
@@ -89,23 +89,16 @@ namespace Food_Recipe_App
 
         private void ResetHomeScreen()
         {
-            
+            listOfFood.Clear();
+            listOfFavorite.Clear();
             PopulateListOfFood(foodTable);
             PopulateListOfFavorite(foodTable);
             updateSearchingData();
+            
 
             //lấy tổng số trang
             noOfPages = (noOfRows / numberOfFoodPerPage) + ((noOfRows % numberOfFoodPerPage) == 0 ? 0 : 1);
             GetPage(currentPage);
-            PreviousButton.Opacity = 0;
-            PreviousButton.IsEnabled = false;
-            if(currentPage == noOfPages)
-            {
-                PageNumber.Opacity = 0;
-
-                NextButton.Opacity = 0;
-                NextButton.IsEnabled = false;
-            }
         }
 
         /// <summary>
@@ -217,9 +210,14 @@ namespace Food_Recipe_App
             {
                 Food tempFood = new Food();
                 tempFood.ID = int.Parse(row["FoodID"].ToString());
-                tempFood.foodName = row["FoodName"].ToString();
-                tempFood.description = row["FoodDescription"].ToString();
-                tempFood.imagePath = row["FoodImagePath"].ToString();
+                tempFood.FoodName = row["FoodName"].ToString();
+                tempFood.Description = row["FoodDescription"].ToString();
+                string imageName = row["FoodImagePath"].ToString();
+
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                path += $"Images\\{tempFood.ID}\\{imageName}";
+
+                tempFood.ImagePath = path;
                 var tmpVar = row["IsFavorite"].ToString();
                 if (tmpVar == "True")
                 {
@@ -253,9 +251,17 @@ namespace Food_Recipe_App
             {
                 Food tempFood = new Food();
                 tempFood.ID = int.Parse(row["FoodID"].ToString());
-                tempFood.foodName = row["FoodName"].ToString();
-                tempFood.description = row["FoodDescription"].ToString();
-                tempFood.imagePath = row["FoodImagePath"].ToString();
+                tempFood.FoodName = row["FoodName"].ToString();
+                tempFood.Description = row["FoodDescription"].ToString();
+
+
+                string imageName = row["FoodImagePath"].ToString();
+
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                path += $"Images\\{tempFood.ID}\\{imageName}";
+
+                tempFood.ImagePath = path;
+
                 var tmpVar = row["IsFavorite"].ToString();
                 if (tmpVar == "True")
                 {
@@ -335,7 +341,7 @@ namespace Food_Recipe_App
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            FoodList.ItemsSource = listOfFood;
+            ResetHomeScreen();
         }
 
         private void FavoriteListButton_Click(object sender, RoutedEventArgs e)
@@ -375,7 +381,7 @@ namespace Food_Recipe_App
             FavoriteList.Items.Refresh();
         }
 
-        private void btnFavorIcon_Click(object sender, RoutedEventArgs e)
+        private void FavoriteButton_Click(object sender, RoutedEventArgs e)
         {
        
             Food f = (Food)FoodList.SelectedItem;
@@ -441,8 +447,16 @@ namespace Food_Recipe_App
 
         private void AddFoodButton_Click(object sender, RoutedEventArgs e)
         {
+            Food newFood = new Food();
+            AddRecipeWindow addNewFood = new AddRecipeWindow(listOfFood.Count() + 1);
+            addNewFood.Owner = this;
+            addNewFood.ShowDialog();
 
+
+            LoadFoodIntoTable("");
+            ResetHomeScreen();
         }
+
 
         private void UpdateNumberOfFoodPerPageTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
          {
@@ -546,5 +560,28 @@ namespace Food_Recipe_App
             LoadFoodIntoTable(value);
             ResetHomeScreen();
         }
+
+        private void ShowFoodDetail(object sender, MouseEventArgs e)
+        {
+            
+            Food f = (Food)FoodList.SelectedItem;
+            if (f == null)
+            {
+                return;
+            }
+
+            try
+            {
+                FoodDetailWindow foodDetail = new FoodDetailWindow(f);
+                foodDetail.Owner = this;
+                foodDetail.ShowDialog();
+            }
+            catch
+            {
+
+            }
+            
+        }
+
     }
 }

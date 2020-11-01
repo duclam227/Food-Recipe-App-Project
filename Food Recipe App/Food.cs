@@ -17,14 +17,19 @@ namespace Food_Recipe_App
         private bool _isFavorite;
         private int _rowNumber;
         private string favoriteIconPath;
+        private string _mediaPath;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int ID { get; set; }
-        public string foodName { get; set; }
-        public string description { get; set; }
-        public string imagePath { get; set; }
-        public List<Step> recipeSteps { get; set; }
+        public int ID { get => _ID; set => _ID = value; }
+        public string FoodName { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get => _imagePath; set => _imagePath = value; }
+
+        public List<Step> RecipeSteps { get => _recipeSteps; set => _recipeSteps = value; }
+        public string MediaPath { get => _mediaPath; set => _mediaPath = value; }
+
+
         public bool isFavorite
         {
             get { return _isFavorite; }
@@ -48,6 +53,7 @@ namespace Food_Recipe_App
             }
         }
 
+        
         public void favoriteIconSource()
         {
             favoriteIcon = "";
@@ -64,9 +70,19 @@ namespace Food_Recipe_App
 
         }
 
+        public void AddStep(Step newStep)
+        {
+            _recipeSteps.Add(newStep);
+        }
+
+        public int StepCount()
+        {
+            return _recipeSteps.Count();
+        }
+
         public Food()
         {
-
+            _recipeSteps = new List<Step>();
         }
     }
 }

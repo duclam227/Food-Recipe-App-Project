@@ -32,7 +32,7 @@
                         <TextBox Name="SearchText" 
                              Width="250" Margin="2, 0, 0, 0" BorderThickness="0" 
                              HorizontalAlignment="Stretch" TextChanged="SearchText_TextChanged"
-                             VerticalAlignment="Center">
+                             VerticalAlignment="Center" KeyDown="SearchText_KeyDown">
                             <TextBox.Style>
                                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                     <Style.Resources>

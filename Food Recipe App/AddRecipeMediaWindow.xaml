@@ -1,0 +1,136 @@
+﻿<Window x:Class="Food_Recipe_App.AddRecipeMediaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Food_Recipe_App"
+        mc:Ignorable="d"
+        Title="AddRecipeMediaWindow" Height="420" Width="900"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0">
+            <StackPanel 
+                DockPanel.Dock="Top"
+                Orientation="Vertical"
+                Margin="0 0 0 100">
+                <Label
+                Margin="30,20,29.6,0"
+                Height="27">
+                    Thêm link một video từ Youtube:</Label>
+                <TextBox 
+                Name ="TextBox_YoutubeURL"
+                TextChanged="textChangedEventHandler"
+                Background="AliceBlue"
+                Padding="10"
+                Height="45" Margin="30 0 30 0"></TextBox>
+
+                <Label
+                    Margin="30,20,29.6,0"
+                    Height="24">
+                    Thêm video:</Label>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button               
+                    Name ="Button_AddMedia"
+                    Margin="20"
+                    Panel.ZIndex="2"
+                    Width="36" Height="36" 
+                    Click="Button_AddMedia_Click"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                        <Image
+                        Name="Image_AddHeader"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="./Images/videoIcon.png">
+                        </Image>
+                    </Button>
+                    <Button               
+                    Name ="Button_CancelMedia"
+                    Margin="20"
+                    Panel.ZIndex="2"
+                    Width="24" Height="24" 
+                    Click="Button_CancelMedia_Click"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                        <Image
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="./Images/cancelIcon.png">
+                        </Image>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <Button
+                    Name ="Button_AddMediaComplete"
+                    DockPanel.Dock="Bottom"
+                    Margin="0 10 0 10"
+                    Panel.ZIndex="2"
+                    Width="36" Height="36" 
+                    Click="Button_AddMediaComplete_Click"
+                    Background="Transparent"
+                    BorderBrush="Transparent">
+                <Image
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="./Images/checkIcon.png">
+                </Image>
+            </Button>
+
+        </DockPanel>
+        <Grid Grid.Column="1" Background="Black">
+
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="400"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <WebBrowser 
+                Name="YoutubeElement"
+                VerticalAlignment="Center"
+                Grid.Column="0" Grid.Row="0">
+            </WebBrowser>
+
+
+            <MediaElement
+                Name="LocalVideoElement"
+                MinHeight="315"
+                MinWidth="560"
+                Grid.Column="0" Grid.Row="0"
+                LoadedBehavior="Manual" UnloadedBehavior="Stop" 
+                MediaOpened="Element_MediaOpened" MediaEnded="Element_MediaEnded">
+            </MediaElement>
+
+            <StackPanel 
+                    Name="PlayerControlBarElement"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center" 
+                    Width="450" 
+                    Orientation="Horizontal" Margin="0 5 0 0"
+                    Visibility="Collapsed">
+
+                <!-- Play button. -->
+                <Image Width="18" Height="18" Source="Images\playIcon.png"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           MouseDown="OnMouseDownPlayMedia" Margin="10" />
+
+                <!-- Pause button. -->
+                <Image Width="18" Height="18" Source="Images\pauseIcon.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           MouseDown="OnMouseDownPauseMedia" Margin="10" />
+
+                <!-- Seek to slider. Ths slider allows you to jump to different parts of the media playback. -->
+
+                <Slider Name="timelineSlider" 
+                            HorizontalAlignment="Center"
+                            Margin="50 10 10 10" ValueChanged="SeekToMediaPosition" Width="200"/>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>

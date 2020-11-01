@@ -32,6 +32,8 @@
         <Style x:Key="FoodTitleText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
 
@@ -85,32 +87,39 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="5" BorderThickness="2" BorderBrush="White"
+                        <Border Padding="0" BorderThickness="2" BorderBrush="white"
                                 Margin="5" CornerRadius="10" Width="160" Height="165">
                             <Grid>
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Opacity="0.5" Background="Black" Panel.ZIndex="11">
-                                </Border>
 
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="10">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding imagePath}" Stretch="UniformToFill"></ImageBrush>
-                                    </Border.Background>
-                                </Border>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="12">
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" Style="{StaticResource FoodTitleText}"/>
-                                        <TextBlock Text="{Binding description}" HorizontalAlignment="Center" Style="{StaticResource FoodTitleText}"/>
-                                        <Button Name="btnFavorIcon" 
-                                                HorizontalAlignment="Center" Click="btnFavorIcon_Click" Panel.ZIndex="20"
+                                <Border Width="140" Height="145" Margin="5" Panel.ZIndex="12" Grid.Column="0">
+                                    <StackPanel VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0">
+                                        <TextBlock Text="{Binding FoodName}" HorizontalAlignment="Center"
+                                                   Style="{StaticResource FoodTitleText}" FontWeight="Bold"/>
+
+                                        <Button Name="FavoriteButton" 
+                                                HorizontalAlignment="Center" Click="FavoriteButton_Click" Panel.ZIndex="20"
                                                 Style="{StaticResource MyButton}" Height="40" Grid.Row="1">
                                             <Image x:Name="imgFavorIcon"  Source="{Binding favoriteIcon}">
                                             </Image>
                                         </Button>
                                     </StackPanel>
+                                </Border>
+
+                                <Border Width="145" Height="150" Grid.Column="0"
+                                 Opacity="0.3" Background="Black" Panel.ZIndex="11" CornerRadius="10">
+                                </Border>
+
+                                <Border Width="145" Height="150" Grid.Column="0"
+                                CornerRadius="10" Panel.ZIndex="10">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill"  RenderOptions.BitmapScalingMode="HighQuality"></ImageBrush>
+                                    </Border.Background>
                                 </Border>
                             </Grid>
                         </Border>
