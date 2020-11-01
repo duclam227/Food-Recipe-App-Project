@@ -41,10 +41,6 @@ namespace Food_Recipe_App
             this.Visibility = Visibility.Hidden;
         }
 
-        private void FavoriteButtonButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         //private ListViewItem _currentItem = null;
         private void ListViewItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -59,7 +55,7 @@ namespace Food_Recipe_App
             //_currentItem = null;
         }
 
-        private void btnFavorIcon_Click(object sender, RoutedEventArgs e)
+        private void FavoriteButton_Click(object sender, RoutedEventArgs e)
         {
             Food f = (Food)FavoriteList.SelectedItem;
 

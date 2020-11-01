@@ -120,9 +120,9 @@ namespace Food_Recipe_App
                 for (int i = 0; i < dataBeforeSearching.Count; i++)
                 {
                     //Check if that data is similar to our text
-                    if (translateToUnsignedCharacter(dataBeforeSearching[i].foodName).ToLower().Contains(searching))
+                    if (translateToUnsignedCharacter(dataBeforeSearching[i].FoodName).ToLower().Contains(searching))
                     {
-                        nameToShow.Add(dataBeforeSearching[i].foodName);    //Add to list which will show on suggestion box
+                        nameToShow.Add(dataBeforeSearching[i].FoodName);    //Add to list which will show on suggestion box
                         dataSuggestion.Add(dataBeforeSearching[i]);         //Add that data to dataSuggestion
                     }
                     else
@@ -172,10 +172,10 @@ namespace Food_Recipe_App
                 this.SearchText.Text = this.suggestionList.SelectedItem.ToString(); //Upcate content of text box with selected choice
                 int indexSelected = suggestionList.SelectedIndex;                   //Get index of that choice from suggestion box
                 
-                Food dataSelected = dataSuggestion[indexSelected];                  //////////////////////////////////////////////
-                dataSuggestion.Clear();                                             //////////////////////////////////////////////
-                dataSuggestion.Add(dataSelected);                                   ///////////////////GET RESULT ////////////////
-                eventReturnFoodResult(dataSuggestion);                              //////////////////////////////////////////////
+                //Food dataSelected = dataSuggestion[indexSelected];                  //////////////////////////////////////////////
+                //dataSuggestion.Clear();                                             //////////////////////////////////////////////
+                //dataSuggestion.Add(dataSelected);                                   ///////////////////GET RESULT ////////////////
+                //eventReturnFoodResult(dataSuggestion);                              //////////////////////////////////////////////
 
                 this.suggestionList.SelectedIndex = -1;                             //Reset index
             }
@@ -237,6 +237,10 @@ namespace Food_Recipe_App
         /// <param name="e"></param>
         private void SearchText_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((SearchText.Text == "") || (dataSuggestion.Count == 0))
+            {
+                return;
+            }
             if (e.Key == Key.Enter)
             {
                 if (eventReturnFoodResult != null)

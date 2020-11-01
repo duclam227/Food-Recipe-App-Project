@@ -33,6 +33,8 @@
         <Style x:Key="FoodTitleText" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="TextAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     
@@ -64,15 +66,15 @@
 
             <Button Name="HomeButton" 
                     Grid.Column="0" Style="{StaticResource MyButton}"
-                    IsEnabled="False">
+                    Click="HomeButton_Click">
                 <Image Source="Images/homeIcon.png" Height="25"></Image>
             </Button>
             
-            <Button Name="FavoriteListButton"
+            <!--<Button Name="FavoriteListButton"
                     Grid.Column="1" Style="{StaticResource MyButton}" Click="FavoriteListButton_Click"
                     ToolTip="Danh sách món ăn yêu thích">
                 <Image Source="Images/favoriteIcon.png" Height="25"></Image>
-            </Button>
+            </Button>-->
 
             <Border Grid.Column="3" BorderBrush="#36D1DC" BorderThickness="2" Width="30"
                     CornerRadius="10" Margin="0 3 0 3" ToolTip="Số món ăn hiển thị trên 1 trang">
@@ -108,11 +110,19 @@
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Text=" .Món ăn yêu thích" FontSize="40" Foreground="White"
+            <TextBlock Text=" Món ăn yêu thích" FontSize="40" Foreground="White"
                        FontWeight="Bold" Grid.Column="0"
                        Panel.ZIndex="99" VerticalAlignment="Bottom" 
                        HorizontalAlignment="Left"
                        MinWidth="360" IsHitTestVisible="False"/>
+
+            <Button Name="FavoriteListButton" 
+                    Grid.Column="0" Style="{StaticResource MyButton}"
+                    Panel.ZIndex="15" Margin="0 0 10 0"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                    Click="FavoriteListButton_Click" ToolTip="Xem toàn bộ danh sách yêu thích">
+                <Image Source="Images\moreIcon.png" Height="40"></Image>
+            </Button>
    
             <ListView x:Name="FavoriteList" Grid.RowSpan="2"
                       Grid.Column="1"
@@ -129,27 +139,32 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="5" BorderThickness="2" BorderBrush="White"
+                        <Border Padding="0" BorderThickness="2" BorderBrush="white"
                                 Margin="5" CornerRadius="10" Width="160" Height="165">
                             <Grid>
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Opacity="0.5" Background="Black" Panel.ZIndex="11">
-                                </Border>
 
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="10">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding imagePath}" Stretch="UniformToFill"></ImageBrush>
-                                    </Border.Background>
-                                </Border>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                                <Border Width="150" Height="150" ClipToBounds="True" Margin="5"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="12">
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center" Style="{StaticResource FoodTitleText}"/>
-                                        <TextBlock Text="{Binding description}" HorizontalAlignment="Center" Style="{StaticResource FoodTitleText}"/>
-                                       
+                                <Border Width="140" Height="145" Margin="5" Panel.ZIndex="12" Grid.Column="0">
+                                    <StackPanel VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0">
+                                        <TextBlock Text="{Binding FoodName}" HorizontalAlignment="Center"
+                                                   Style="{StaticResource FoodTitleText}" FontWeight="Bold"/>
                                     </StackPanel>
+                                </Border>
+
+                                <Border Width="145" Height="150" Grid.Column="0"
+                                 Opacity="0.3" Background="Black" Panel.ZIndex="11" CornerRadius="10">
+                                </Border>
+
+                                <Border Width="145" Height="150" Grid.Column="0"
+                                CornerRadius="10" Panel.ZIndex="10">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill"  RenderOptions.BitmapScalingMode="HighQuality"></ImageBrush>
+                                    </Border.Background>
                                 </Border>
                             </Grid>
                         </Border>
@@ -161,6 +176,7 @@
                         <WrapPanel HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
+
             </ListView>
         </Grid>
 
@@ -193,41 +209,74 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="5" BorderThickness="2" BorderBrush="#5B86E5"
-                                Margin="5" CornerRadius="10" Width="160" Height="165">
+                        <Border Padding="0" BorderThickness="2" BorderBrush="#5B86E5"
+                                Margin="5" CornerRadius="10" Width="160" Height="165"
+                                ToolTip="Nhấp đôi chuột để xem thông tin chi tiết">
                             <Grid>
-                                <Border Width="150" Height="150"  Margin="5"
-                                 Opacity="0.3" Background="Black" Panel.ZIndex="11">
-                                </Border>
 
-                                <Border Width="150" Height="150" ClipToBounds="False" Margin="5"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="10">
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding imagePath}" Stretch="UniformToFill"></ImageBrush>
-                                    </Border.Background>
-                                </Border>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                                <Border Width="150" Height="150" Margin="5" ClipToBounds="False"
-                                CornerRadius="10 10 10 10" Panel.ZIndex="12">
-                                    <StackPanel ClipToBounds="False" VerticalAlignment="Center"
-                                                HorizontalAlignment="Center" AllowDrop="True">
-                                        <TextBlock Text="{Binding foodName}" HorizontalAlignment="Center"
+                                <Grid Grid.Column="0" Panel.ZIndex="11" Opacity="0">
+                                    <Grid.Triggers>
+                                        <EventTrigger RoutedEvent="Grid.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0:0.30"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Grid.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0:0.30"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Grid.Triggers>
+                                    
+                                    <Border Name="FoodInfoBorder" 
+                                        Width="140" Height="150" 
+                                        Margin="5" 
+                                        Panel.ZIndex="12" 
+                                        Grid.Column="0">
+
+                                        <StackPanel VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                Margin="0">
+                                            <TextBlock Text="{Binding FoodName}" HorizontalAlignment="Center"
                                                    Style="{StaticResource FoodTitleText}" FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding description}" HorizontalAlignment="Center"
-                                                   Style="{StaticResource FoodTitleText}"/>
 
-                                        <Button Name="btnFavorIcon" 
-                                                HorizontalAlignment="Center" Click="btnFavorIcon_Click" Panel.ZIndex="20"
+                                            <Button Name="FavoriteButton" 
+                                                HorizontalAlignment="Center" Click="FavoriteButton_Click" Panel.ZIndex="20"
                                                 Style="{StaticResource MyButton}" Height="40" Grid.Row="1">
-                                            <Image x:Name="imgFavorIcon"  Source="{Binding favoriteIcon}">
-                                            </Image>
-                                        </Button>
-                                    </StackPanel>
+                                                <Image x:Name="imgFavorIcon"  Source="{Binding favoriteIcon}">
+                                                </Image>
+                                            </Button>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Name="FoodOpacityMask"
+                                        Width="145" Height="150" Grid.Column="0"
+                                 Opacity="0.4" Background="Black" Panel.ZIndex="11" CornerRadius="10">
+                                       
+                                    </Border>
+                                </Grid>
+           
+
+                                <Border Width="145" Height="150" Grid.Column="0"
+                                CornerRadius="10" Panel.ZIndex="10">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill"  RenderOptions.BitmapScalingMode="HighQuality"></ImageBrush>
+                                    </Border.Background>
                                 </Border>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel HorizontalAlignment="Center"/>
@@ -237,6 +286,7 @@
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="PreviewMouseDown" Handler="SelectCurrentItem"/>
+                        <EventSetter Event="PreviewMouseDoubleClick" Handler="ShowFoodDetail"/>
                     </Style>
 
                 </ListView.Resources>
