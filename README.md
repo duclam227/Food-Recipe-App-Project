@@ -1,6 +1,5 @@
-# Food-Recipe-App-Project
-Đồ án Food Recipe App
------------------------------------
+# Đồ án Food Recipe App
+
 ## Danh sách thành viên
 - Nguyễn Duy Thiên Kim - 18120047
 - Lâm Xương Đức        - 18120163
